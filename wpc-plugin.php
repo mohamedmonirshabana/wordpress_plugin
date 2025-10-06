@@ -31,8 +31,4 @@ if(!function_exists('wpc_on_activate_plugin')){
     register_Activation_hook(__FILE__,'wpc_on_activate_plugin');
 }
 
-require plugin_dir_path(__FILE__) . 'custom-post-types.php';
-require plugin_dir_path(__FILE__) . 'custom-taxonomies.php';
-require plugin_dir_path(__FILE__) . 'metaboxes.php';
-require plugin_dir_path(__FILE__) . 'taxonomies-fields.php';
-require plugin_dir_path(__FILE__) . 'users.php';
+require plugin_dir_path(__FILE__) . 'includes/index.php';
