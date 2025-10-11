@@ -32,3 +32,4 @@ if(!function_exists('wpc_on_activate_plugin')){
 }
 
 require plugin_dir_path(__FILE__) . 'includes/index.php';
+require plugin_dir_path(__FILE__). 'admin/index.php';
