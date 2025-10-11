@@ -5,7 +5,7 @@ if(!function_exists('wpc_add_code_color_fields')){
         ?>
         <div class="form-field">
             <label for="wpc_icon_code"><?php _e('Icon Code', 'wpcourse'); ?></label>
-            <input type="text" name="wpc_icon_code" id="wpc_icon_code">
+            <input type="text" name="wpc_icon_code" id="wpc_icon_code" class="iconpicker">
         </div>
         <div class="form-field">
             <label for="wpc_icon_color"><?php _e('Icon Code', 'wpcourse'); ?></label>
@@ -34,7 +34,7 @@ if(!function_exists('wpc_edit_code_color_fields')){
                 <label for="wpc_icon_code"><?php _e('Icon Code', 'wpcourse'); ?></label>
             </th>
             <td>
-                <input value="<?php echo esc_attr($term_meta['wpc_icon_code'][0]); ?>" type="text" name="wpc_icon_code" id="wpc_icon_code">
+                <input value="<?php echo esc_attr($term_meta['wpc_icon_code'][0]); ?>" class="iconpicker" type="text" name="wpc_icon_code" id="wpc_icon_code">
             </td>
     </tr>
         <tr class="form-field">
