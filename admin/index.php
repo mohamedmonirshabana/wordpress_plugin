@@ -6,3 +6,5 @@ add_action('admin_enqueue_scripts', function(){
     wp_enqueue_script('iconpicker-script', plugin_dir_url(__FILE__).'assets/js/fontawesome-iconpicker.min.js');
     wp_enqueue_script('admin-script', plugin_dir_url(__FILE__).'assets/js/admin.js');
 });
+
+require plugin_dir_url(__FILE__) . 'columns.php';
