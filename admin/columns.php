@@ -7,6 +7,9 @@ if(!function_exists('wpc_manage_post_ad_columns')){
         if(current_Theme_supports('post-thumbnails')){
             $columns['wpc_thumbnail_column'] = __('Thumbnail','wpcourse');
         }
+        if(array_key_exists('author', $columns)){
+            unset($columns['author']);
+        }
         return $columns;
     }
     add_filter('manage_post_posts_columns','wpc_manage_post_ad_columns');
