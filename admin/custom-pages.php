@@ -35,7 +35,7 @@ if(!function_exists('wpc_social_media_options')){
     {
         $networks = ['facebook', 'flickr' ,'instagram','pintrest', 'twitter', 'youtube'];
         if(isset($_POST['_wpnonce'])){
-            if(!wp_verify_nonce($_POST['_wpnonce'], 'wpc_social_options')){
+            if(!wp_verify_nonce($_POST['_wpnonce'], 'wpc_social_options' || !current_user_can('manage_options'))){
                 wp_die();
             }
             $links = [];
