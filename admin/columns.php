@@ -31,3 +31,13 @@ if(!function_exists('wpc_set_post_ad_column_content')){
     add_filter('manage_post_posts_custom_column', 'wpc_set_post_ad_column_content',10, 2);
     add_filter('manage_wpc_ad_posts_custom_column', 'wpc_set_post_ad_column_content', 10 , 2);
 }
+
+if(!function_exists('wpc_set_post_ad_sortable_columns')){
+    function wpc_set_post_ad_sortable_columns($columns)
+    {
+        $columns['wpc_views_column'] = 'post_views';
+        return $columns;
+    }
+    add_filter('manage_edit-post_sortable_columns','wpc_set_post_ad_sortable_columns');
+    add_filter('manage_edit-wpc_ad_sortable_columns','wpc_set_post_ad_sortable_columns');
+}
