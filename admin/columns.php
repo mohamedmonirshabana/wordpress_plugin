@@ -41,3 +41,15 @@ if(!function_exists('wpc_set_post_ad_sortable_columns')){
     add_filter('manage_edit-post_sortable_columns','wpc_set_post_ad_sortable_columns');
     add_filter('manage_edit-wpc_ad_sortable_columns','wpc_set_post_ad_sortable_columns');
 }
+
+add_action('pre_get_posts',function($query){
+    if(is_admin()){
+        global $current_screen;
+        if(is_object($current_screen) && ($current_screen->id == 'edit-post' || $current_screen->id == 'edit-wpc_ad')){
+            if($query->get('orderby') == 'post_views'){
+                $query->set('meta_key', 'wpc_post_views');
+                $query->set('orderby', 'meta_value_num');
+            }
+        }
+    }
+});
