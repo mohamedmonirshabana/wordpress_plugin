@@ -9,6 +9,7 @@ if(!function_exists('wpc_register_taxonomies')){
                 'edit_terms' => 'edit_ad_groups',
                 'assign_terms' => 'assign_ad_groups',
             ],
+            'show_admin_column' => true,
             'labels' => [
                 'name'                       => __( 'Groups', 'wpcourse' ),
                 'singular_name'              => __( 'Group', 'wpcourse' ),
