@@ -29,3 +29,34 @@ add_action('admin_menu',function(){
         2
     );
 });
+
+if(!function_exists('wpc_social_media_options')){
+    function wpc_social_media_options()
+    {
+        $networks = ['facebook', 'flickr' ,'instagram','pintrest', 'twitter', 'youtube'];
+        ?>
+        <div class="wrap">
+            <h1><?php _e('Social Media Links', 'wpcourse'); ?></h1>
+            <form action="" method="post">
+                <table class="form-table">
+                    <?php
+                        foreach($networks as $network){
+                            ?>
+                                <tr>
+                                    <th><?php _e(ucfirst($network), 'wpcourse'); ?></th>
+                                    <td>
+                                        <input type="url" name="<?php echo esc_attr('wpc_'.$network .'_link'); ?>" id="">
+                                    </td>
+                                </tr>
+                            <?php
+                        } 
+                    ?>
+                </table>
+                <p class="submit">
+                    <input type="submit" value="<?php echo esc_attr(__('Save Social Links', 'wpcourse'))  ?>" class="button button-primary">
+                </p>
+            </form>
+        </div>
+        <?php
+    }
+}
