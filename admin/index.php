@@ -8,3 +8,4 @@ add_action('admin_enqueue_scripts', function(){
 });
 
 require plugin_dir_path(__FILE__) . 'columns.php';
+require plugin_dir_path(__FILE__) . 'custom-pages.php';
