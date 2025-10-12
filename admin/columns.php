@@ -47,8 +47,19 @@ add_action('pre_get_posts',function($query){
         global $current_screen;
         if(is_object($current_screen) && ($current_screen->id == 'edit-post' || $current_screen->id == 'edit-wpc_ad')){
             if($query->get('orderby') == 'post_views'){
-                $query->set('meta_key', 'wpc_post_views');
+                // $query->set('meta_key', 'wpc_post_views');
                 $query->set('orderby', 'meta_value_num');
+                $query->set('meta_query', [
+                    'relation' => 'OR',
+                    [
+                        'key' => 'wpc_post_views',
+                        'compare' => 'Not EXISTS',
+                    ],
+                    [
+                        'key'  => 'wpc_post_views',
+                        'compare' => 'EXISTS'
+                    ]
+                ]);
             }
         }
     }
