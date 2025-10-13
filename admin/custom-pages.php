@@ -75,3 +75,81 @@ if(!function_exists('wpc_social_media_options')){
         <?php
     }
 }
+
+if(!function_exists('wpc_post_options')){
+    function wpc_post_options()
+    {
+        $sections = [
+            'breadcrumb' => [
+                'file' => 'breadcrumb',
+                'title' => __('Breadcrumb', 'wpcourse')
+            ],
+            'categories'=>[
+                'file' => 'categories',
+                'title' => __('Post Categories', 'wpcourse')
+            ],
+            'title' =>[
+                'file' => 'title',
+                'title' => __('Post Title', 'wpcourse')
+            ],
+            'post_meta' =>[
+                'file' => 'post_meta',
+                'title' => __('Post Meta', 'wpcourse')
+            ],
+            'share_top' => [
+                'file' => 'share',
+                'title' => __('Share Top', 'wpcourse')
+            ],
+            'post_thumbnail' =>[
+                'file' => 'post_thumbnail',
+                'title' => __('Post Thumbnail', 'wpcourse')
+            ],
+            'post_content' =>[
+                'file' => 'post_content',
+                'title' => __('Post Content', 'wpcourse')
+            ],
+            'tags' =>[
+                'file' => 'tags',
+                'title' => __('Post Tags', 'wpcourse')
+            ],
+            'share_bottom' =>[
+                'file' => 'share',
+                'title' => __('Share Bottom', 'wpcourse')
+            ],
+            'next_previous' =>[
+                'file' => 'next_previous',
+                'title' => __('Next & Previous Posts', 'wpcourse')
+            ],
+            'author' =>[
+                'file' => 'author',
+                'title' => __('Post Author', 'wpcourse')
+            ],
+            'related_posts'=>[
+                'file' => 'related_posts',
+                'title' => __('Related Posts', 'wpcourse')
+            ]
+        ];
+        ?>
+        <form action="" method="post">
+            <table class="form-table">
+                <?php
+                foreach($sections as $section => $data){
+                    ?>
+                    <tr>
+                        <th><?php echo $data['title']; ?></th>
+                        <td>
+                            <input type="checkbox" name="wpc_show_<?php echo esc_attr($section); ?>" id="">
+                        </td>
+                    </tr>
+                    <?php
+                } 
+                ?>
+            </table>
+            <p class="submit">
+                <input type="submit" value="<?php echo esc_attr(__('Save Post options', 'wpcourse')); ?>" class="button button-primary">
+            </p>
+            <?php wp_nonce_field('wpc_post_options'); ?>
+        </form>
+        <?php
+    }
+}
