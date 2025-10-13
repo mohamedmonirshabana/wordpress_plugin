@@ -129,16 +129,32 @@ if(!function_exists('wpc_post_options')){
                 'title' => __('Related Posts', 'wpcourse')
             ]
         ];
+        if(isset($_POST['_wpnonce'])){
+            if(!wp_verify_nonce($_POST['_wpnonce'], 'wpc_post_options') || !current_user_can('manage_options')){
+                wp_die();
+            }
+            $parts = [];
+            foreach($sections as $section => $data){
+                $parts[$section]['show'] = 0;
+                if(isset($_POST['wpc_show_'.$section])){
+                    $parts[$section]['show'] = 1;
+                    $parts[$section]['file'] = $sections[$section]['file'];
+                }
+            }
+            update_option('wpc_post_options', $parts, false);
+        }
         ?>
+        <h1><?php _e('Post Options', 'wpcourse'); ?></h1>
         <form action="" method="post">
             <table class="form-table">
                 <?php
+                $parts = get_option('wpc_post_options');
                 foreach($sections as $section => $data){
                     ?>
                     <tr>
                         <th><?php echo $data['title']; ?></th>
                         <td>
-                            <input type="checkbox" name="wpc_show_<?php echo esc_attr($section); ?>" id="">
+                            <input <?php if($parts[$section]['show']==1){echo 'checked'; } ?> type="checkbox" name="wpc_show_<?php echo esc_attr($section); ?>" id="">
                         </td>
                     </tr>
                     <?php
