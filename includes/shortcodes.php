@@ -1,10 +1,11 @@
 <?php 
 
-add_shortcode('wpc_ad', function(){
+add_shortcode('wpc_ad', function($attributes){
     $ads = get_posts([
+        'p' => $attributes['id'],
         'post_type' => ['wpc_ad'],
-        'numberposts' => 1,
-        'orderby' =>  'rand',
+        // 'numberposts' => 1,
+        // 'orderby' =>  'rand',
     ]);
     if(count($ads)){
         $result = '<div class="d-flex mt-5 mb-5">';
