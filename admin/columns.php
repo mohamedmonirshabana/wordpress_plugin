@@ -16,6 +16,19 @@ if(!function_exists('wpc_manage_post_ad_columns')){
     add_filter('manage_wpc_ad_posts_columns','wpc_manage_post_ad_columns');
 }
 
+add_filter('manage_wpc_ad_posts_columns', function($columns){
+    $columns['wpc_ad_shortcode'] = __('Shortcode', 'wpcourse');
+    return $columns;
+});
+
+add_filter('manage_wpc_ad_posts_custom_column', function($column, $post_id){
+    switch($column){
+        case 'wpc_ad_shortcode':
+            echo '[wpc_ad id="'.$post_id.'"]';
+            break;
+    }
+},10,2);
+
 if(!function_exists('wpc_set_post_ad_column_content')){
     function wpc_set_post_ad_column_content($column, $post_id)
     {
