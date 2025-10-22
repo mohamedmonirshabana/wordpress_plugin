@@ -1,6 +1,9 @@
 <?php 
 
 add_shortcode('wpc_ad', function($attributes){
+    if(!array_key_exists('id',$attributes)){
+        return;
+    }
     $ads = get_posts([
         'p' => $attributes['id'],
         'post_type' => ['wpc_ad'],
@@ -8,9 +11,11 @@ add_shortcode('wpc_ad', function($attributes){
         // 'orderby' =>  'rand',
     ]);
     if(count($ads)){
-        $difference = (int)abs((current_time('U') - strtotime($ads[0]->post_date)));
-        if($difference > ((int)($attributes['days'])*86400)){
-            return;
+        if(array_key_exists('days', $attributes)){
+            $difference = (int)abs((current_time('U') - strtotime($ads[0]->post_date)));
+            if($difference > ((int)($attributes['days'])*86400)){
+                return;
+            }
         }
         $result = '<div class="d-flex mt-5 mb-5">';
         $result .= '<div class="ad-thumbnail">' .get_the_post_thumbnail($ads[0]->ID, [110, 110]) .'</div>';
