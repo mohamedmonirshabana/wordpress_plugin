@@ -13,7 +13,16 @@ if(!function_exists('wpc_add_roles')){
             'upload_files' =>true,
             'assign_ad_groups' => true,
         ]);
+        $admin = get_role('administrator');
+        if($admin){
+             $admin->add_cap('edit_ads');
+            $admin->add_cap('delete_ads');
+            $admin->add_cap('assign_ad_groups');
+            $admin->add_cap('edit_posts'); // Ensure they can edit posts too
+        }
     }
+
+    add_action('init', 'wpc_add_roles');
 }
 
 if(!function_exists('wpc_user_aditional_fields')){
