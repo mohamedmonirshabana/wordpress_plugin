@@ -1,5 +1,11 @@
 <?php 
 
+add_shortcode('wpc_colored_area', function($attributes, $content){
+    $defaults= ['color' => '#fff'];
+    $attributes =  shortcode_atts($defaults, $attributes);
+    return '<div style="background-color:'.esc_attr($attributes['color']).';">'.do_shortcode($content).'</div>';
+});
+
 add_shortcode('wpc_ad', function($attributes){
     if(!array_key_exists('id',$attributes)){
         return;
