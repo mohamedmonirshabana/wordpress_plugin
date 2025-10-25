@@ -37,3 +37,58 @@ add_shortcode('wpc_ad', function($attributes){
         return $result;
     }
 });
+
+if(!function_exists('wpc_masonry_section')){
+    function wpc_masonry_section($attributes, $content, $tag){
+        return '<div class="'.$tag.'-side">'. do_shortcode($content) . '</div>';
+    }
+    add_shortcode('left', 'wpc_masonry_section');
+    add_shortcode('center', 'wpc_masonry_section');
+    add_shortcode('right', 'wpc_masonry_section');
+}
+
+add_shortcode('post', function($attributes){
+    $defaults = ['order' => 1];
+    $attributes = shortcode_atts($defaults, $attributes);
+    $masonry_post = new WP_Query([
+        'post_type' => 'post',
+        'posts_per_page' => 1,
+        'offset' => $attributes['order'] -1 
+    ]);
+    $extra_classes = '';
+    switch($attributes['order']){
+        case '1':
+        case '5':
+            $thumbnail_size = '534x468';
+            break;
+        case '2':
+            $thumbnail_size = '533x261';
+            break;
+        default:
+            $thumbnail_size = '400x299';
+            $extra_classes = 'small-box';
+    }
+    if($masonry_post->have_posts()){
+        while($masonry_post->have_posts()){
+            $masonry_post->the_post();
+            $categories = get_the_category();
+            $post_categories = (!empty($categories)) ? '<span class="bg-'.wpc_get_term_color($categories[0]->term_id).'"><a href="'.get_term_link($categories[0]).'" title="">'.$categories[0]->name.'</a></span>':'';
+            return '
+            <div class="masonry-box post-media '.$extra_classes.'">
+                    <img src="'.get_the_post_thumbnail_url(null, $thumbnail_size).'" alt="" class="img-fluid">
+                    <div class="shadoweffect">
+                    <div class="shadow-desc">
+                        <div class="blog-meta">
+                            '.$post_categories.'
+                            <h4><a href="'.get_permalink().'" title="">'.get_the_title().'</a></h4>
+                            <small><a href="'.get_permalink().'" title="">'.get_the_date('d M, Y').'</a></small>
+                            <small>'.get_the_author_link().'</small>
+                        </div><!-- end meta -->
+                    </div><!-- end shadow-desc -->
+                </div><!-- end shadow -->
+            </div><!-- end post-media -->
+            ';
+        }
+    }
+    
+});
