@@ -101,3 +101,9 @@ add_shortcode('masonry_wrapper',function($attributes, $content){
 add_shortcode('section', function($attributes,$content){
     return '<section class="section"><div class="container"><div class="row">'. do_shortcode($content). '</div></div></section>';
 });
+
+add_shortcode('column',function($attributes, $content){
+    $defaults = ['class' => 'col-12'];
+    $attributes = shortcode_atts($defaults, $attributes);
+    return '<div class="'. esc_attr($attributes['class']) . '">' . do_shortcode($content) . '</div>';
+});
