@@ -120,18 +120,45 @@ add_shortcode('posts',function($attributes){
         'posts_per_page' => $attributes['count'],
         'post_type' => 'post',
     ];
+    $category = false;
     if($attributes['category']){
         $query_args['cat'] = $attributes['category'];
+        $category = get_term($attributes['category']);
+    }
+    $template_args =[];
+    switch($attributes['card']){
+        case '1':
+            $extension ='1';
+            break;
+        case '2':
+            $extension = '2';
+            $template_args['image_size'] = '345x512';
+            break;
+        case '3':
+            $extension = 'wide';
+            break;
+        case '4':
+            $extension = '2';
+            $template_args['image_size'] = 'horizontal';
     }
     $all_posts = '';
     $section_posts = new WP_Query($query_args);
     if($section_posts->have_posts()){
+        if($category instanceof WP_Term){
+            $all_posts .= '<div class="row"><div class="col-12"><div class="section-title">
+            <h3 class="color-"'. wpc_get_term_color($category->term_id). '">
+            <a href="'.esc_url(get_term_link($category)).'">'. $category->name .'</a></h3></div></div></div>';
+        }
+        $all_posts .= '<div class="row">';
         while($section_posts->have_posts()){
             $section_posts->the_post();
+            $all_posts .= '<div class="col-12 col-md-"'.(12 / $attributes['posts_per_row']) .'">';
             ob_start();
-            get_template_part('partials/post-card-big');
+            get_template_part('partials/post-card',$extension, $template_args);
             $all_posts .= ob_get_clean();
+            $all_posts .='</div>';
         }
+        $all_posts .= '</div>';
     }
     return $all_posts;
 });
