@@ -89,6 +89,7 @@ add_shortcode('post', function($attributes){
             </div><!-- end post-media -->
             ';
         }
-    }
-    
+        wp_reset_postdata();
+    } 
 });
+
