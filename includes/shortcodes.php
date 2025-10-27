@@ -93,3 +93,11 @@ add_shortcode('post', function($attributes){
     } 
 });
 
+add_shortcode('masonry_wrapper',function($attributes, $content){
+    return '<section class="section first-section"><div class="container-fluid"><div class="masonry-blog clearfix">'
+            . do_shortcode($content) . '</div></div></section>';
+});
+
+add_shortcode('section', function($attributes,$content){
+    return '<section class="section"><div class="container"><div class="row">'. do_shortcode($content). '</div></div></section>';
+});
