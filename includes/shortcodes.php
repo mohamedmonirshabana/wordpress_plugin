@@ -107,3 +107,31 @@ add_shortcode('column',function($attributes, $content){
     $attributes = shortcode_atts($defaults, $attributes);
     return '<div class="'. esc_attr($attributes['class']) . '">' . do_shortcode($content) . '</div>';
 });
+
+add_shortcode('posts',function($attributes){
+    $defaults = [
+        'category'=>false,
+        'count' =>2,
+        'posts_per_row' => 1,
+        'card' =>2
+    ];
+    $attributes = shortcode_atts($defaults, $attributes);
+    $query_args = [
+        'posts_per_page' => $attributes['count'],
+        'post_type' => 'post',
+    ];
+    if($attributes['category']){
+        $query_args['cat'] = $attributes['category'];
+    }
+    $all_posts = '';
+    $section_posts = new WP_Query($query_args);
+    if($section_posts->have_posts()){
+        while($section_posts->have_posts()){
+            $section_posts->the_post();
+            ob_start();
+            get_template_part('partials/post-card-big');
+            $all_posts .= ob_get_clean();
+        }
+    }
+    return $all_posts;
+});
