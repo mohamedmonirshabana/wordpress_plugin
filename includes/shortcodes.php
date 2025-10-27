@@ -159,6 +159,7 @@ add_shortcode('posts',function($attributes){
             $all_posts .='</div>';
         }
         $all_posts .= '</div>';
+        wp_reset_postdata();
     }
     return $all_posts;
 });
