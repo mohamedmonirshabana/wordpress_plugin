@@ -6,3 +6,4 @@ require plugin_dir_path(__FILE__) . 'metaboxes.php';
 require plugin_dir_path(__FILE__) . 'taxonomies-fields.php';
 require plugin_dir_path(__FILE__) . 'users.php';
 require plugin_dir_path(__FILE__) . 'shortcodes.php';
+require plugin_dir_url(__FILE__) . 'database.php';
