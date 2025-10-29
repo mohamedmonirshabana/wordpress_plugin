@@ -35,9 +35,18 @@ if(!function_exists('wpc_on_activate_plugin')){
 if(!function_exists('wpc_on_deactivate_plugin')){
     function wpc_on_deactivate_plugin(){
         remove_role('company');
-        wpc_drop_db_tables();
     }
     register_deactivation_hook(__FILE__,'wpc_on_deactivate_plugin');
+}
+
+if(!function_exists('wpc_on_uninstall_plugin')){
+    function wpc_on_uninstall_plugin(){
+        global $wpdb;
+        $table_query = 'Drop TABLE IF EXISTS '.$wpdb->prefix . 'subscribers';
+        $wpdb->query($table_query);
+        
+    }
+    register_uninstall_hook(__FILE__,'wpc_on_uninstall_plugin');
 }
 
 require plugin_dir_path(__FILE__) . 'includes/index.php';
