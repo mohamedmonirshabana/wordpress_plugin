@@ -27,8 +27,17 @@ if(!function_exists('wpc_on_activate_plugin')){
         wpc_register_post_types();
         wpc_register_taxonomies();
         flush_rewrite_rules();
+        wpc_create_db_tables();
     }
     register_Activation_hook(__FILE__,'wpc_on_activate_plugin');
+}
+
+if(!function_exists('wpc_on_deactivate_plugin')){
+    function wpc_on_deactivate_plugin(){
+        remove_role('company');
+        wpc_drop_db_tables();
+    }
+    register_deactivation_hook(__FILE__,'wpc_on_deactivate_plugin');
 }
 
 require plugin_dir_path(__FILE__) . 'includes/index.php';
