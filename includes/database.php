@@ -15,8 +15,3 @@ if(!function_exists('wpc_create_db_tables')){
     }
 }
 
-if(!function_exists('wpc_drop_db_tables')){
-    function wpc_drop_db_tables(){
-        
-    }
-}
