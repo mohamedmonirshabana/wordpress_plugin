@@ -3,7 +3,7 @@
 if(!function_exists('wpc_add_roles')){
     function wpc_add_roles()
     {
-        remove_role('company');
+        // remove_role('company');
         add_role('company', __('Company', 'wpcourse'), [
             'read' => true,
             'delete_posts' => true,
