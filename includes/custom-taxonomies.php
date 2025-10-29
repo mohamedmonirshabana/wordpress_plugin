@@ -1,9 +1,10 @@
-<?php 
+<?php
 
-if(!function_exists('wpc_register_taxonomies')){
-    function wpc_register_taxonomies(){
-        register_taxonomy('wpc_ad_group', ['wpc_ad'],[
-            'capabilities' =>[
+if (!function_exists('wpc_register_taxonomies')) {
+    function wpc_register_taxonomies()
+    {
+        register_taxonomy('wpc_ad_group', ['wpc_ad'], [
+            'capabilities' => [
                 'manage_terms' => 'manage_ad_groups',
                 'delete_terms' => 'delete_ad_groups',
                 'edit_terms' => 'edit_ad_groups',

@@ -34,20 +34,24 @@ if(!function_exists('wpc_on_activate_plugin')){
 
 if(!function_exists('wpc_on_deactivate_plugin')){
     function wpc_on_deactivate_plugin(){
-        remove_role('company');
+        // remove_role('company');
+        wpc_add_roles();
+        wpc_register_post_types();
+        wpc_register_taxonomies();
+        // flush_rewrite_rules();
     }
     register_deactivation_hook(__FILE__,'wpc_on_deactivate_plugin');
 }
 
-if(!function_exists('wpc_on_uninstall_plugin')){
-    function wpc_on_uninstall_plugin(){
-        global $wpdb;
-        $table_query = 'Drop TABLE IF EXISTS '.$wpdb->prefix . 'subscribers';
-        $wpdb->query($table_query);
+// if(!function_exists('wpc_on_uninstall_plugin')){
+//     function wpc_on_uninstall_plugin(){
+//         global $wpdb;
+//         $table_query = 'Drop TABLE IF EXISTS '.$wpdb->prefix . 'subscribers';
+//         $wpdb->query($table_query);
         
-    }
-    register_uninstall_hook(__FILE__,'wpc_on_uninstall_plugin');
-}
+//     }
+//     register_uninstall_hook(__FILE__,'wpc_on_uninstall_plugin');
+// }
 
 require plugin_dir_path(__FILE__) . 'includes/index.php';
 require plugin_dir_path(__FILE__). 'admin/index.php';
