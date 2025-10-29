@@ -1,0 +1,22 @@
+<?php 
+
+if(!function_exists('wpc_create_db_tables')){
+    function wpc_create_db_tables(){
+        global $wpdb;
+        $table_query = 'CREATE TABLE IF NOT EXISTS `'.$wpdb->prefix.'subscribers`(
+            `id` int(10) UNSIGNED NOT NULL Auto_INCREMENT,
+            `email` varchar(40) COLLATE '.$wpdb->collate.' NOT NULL,
+            `Created_at` datetime NOT Null DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY(`id`),
+            UNIQUE KEY `email` (`email`)
+        )ENGINE=MyISAM DEFAULT CHARSET='.$wpdb->charset.' COLLATE='.$wpdb->collate.';';
+        require_once ABSPATH .'wp-admin/includes/upgrade.php';
+        dbDelta($table_query);
+    }
+}
+
+if(!function_exists('wpc_drop_db_tables')){
+    function wpc_drop_db_tables(){
+        
+    }
+}
