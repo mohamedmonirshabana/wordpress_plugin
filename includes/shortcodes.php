@@ -53,7 +53,8 @@ add_shortcode('post', function($attributes){
     $masonry_post = new WP_Query([
         'post_type' => 'post',
         'posts_per_page' => 1,
-        'offset' => $attributes['order'] -1 
+        'offset' => $attributes['order'] -1,
+        'ignore_sticky_posts' => true 
     ]);
     $extra_classes = '';
     switch($attributes['order']){
