@@ -51,6 +51,12 @@ if(!function_exists('wpc_on_save_post')){
         if(isset($_POST['wpc_ad_url'])){
             update_post_meta($post_id, 'wpc_ad_url', esc_url_raw($_POST['wpc_ad_url']));
         }
+        if(isset($_POST['wpc_meta_keywords'])){
+            update_post_meta($post_id, 'wpc_meta_keywords', ($_POST['wpc_meta_keywords']));
+        }
+        if(isset($_POST['wpc_meta_description'])){
+            update_post_meta($post_id, 'wpc_meta_description', ($_POST['wpc_meta_description']));
+        }
     }
-    add_Action('save_post_wpc_ad', 'wpc_on_save_post',10,3);
+    add_Action('save_post', 'wpc_on_save_post',10,3);
 }
