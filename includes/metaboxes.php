@@ -10,9 +10,30 @@ if(!function_exists('wpc_add_metaboxes')){
             'normal',
             'default'
         );
+        add_meta_box(
+            'wpc_meta_tags_content',
+            __('Meta Tags', 'wpcourse'),
+            'wpc_meta_tags_fields',
+            ['post','page', 'wpc_ad']
+        );
     }
     add_action('add_meta_boxes', 'wpc_add_metaboxes');
+}
 
+if(!function_exists('wpc_meta_tags_fields')){
+    function wpc_meta_tags_fields($post){
+        $post_meta = get_post_meta($post->ID);
+        ?>
+        <p>
+            <label for=""><?php _e('Meta keywords', 'wpcourse') ?></label>
+            <input type="text" name="wpc_meta_keywords" value="<?php echo esc_attr($post_meta['wpc_meta_keywords'][0]) ?>">
+        </p>
+        <p>
+            <label for=""><?php _e('Meta description','wpcourse'); ?></label>
+            <input type="text" name="wpc_meta_description" value="<?php echo esc_attr($post_meta['wpc_meta_description'][0]) ?>">
+        </p>
+        <?php
+    }
 }
 
 function wpc_ad_url_html($post){
