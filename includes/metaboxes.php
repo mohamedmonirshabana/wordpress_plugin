@@ -36,16 +36,17 @@ if(!function_exists('wpc_meta_tags_fields')){
     }
 }
 
-function wpc_ad_url_html($post){
-    $ad_url = get_post_meta($post->ID, 'wpc_ad_url', true);
-    ?>
-    <p>
-        <label for="wpc_ad_url"><?php _e('Type URL', 'wpcourse'); ?></label>
-        <input type="text" name="wpc_ad_url" id="wpc_ad_url" value="<?php echo esc_url($ad_url); ?>">
-    </p>
-    <?php
+if(!function_exists('wpc_ad_url_html')){
+    function wpc_ad_url_html($post){
+        $ad_url = get_post_meta($post->ID, 'wpc_ad_url', true);
+        ?>
+        <p>
+            <label for="wpc_ad_url"><?php _e('Type URL', 'wpcourse'); ?></label>
+            <input type="text" name="wpc_ad_url" id="wpc_ad_url" value="<?php echo esc_url($ad_url); ?>">
+        </p>
+        <?php
+    }
 }
-
 if(!function_exists('wpc_on_save_post')){
     function wpc_on_save_post($post_id, $post, $update){
         if(isset($_POST['wpc_ad_url'])){
